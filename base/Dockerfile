@@ -23,5 +23,4 @@ ADD        supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD        inet_http_server.conf /etc/supervisor/conf.d/inet_http_server.conf
 EXPOSE     9001
 
-ENTRYPOINT ["/usr/bin/supervisord"]
-ONBUILD CMD ["--configuration", "/etc/supervisor/supervisord.conf"]
+ONBUILD CMD ["/usr/bin/supervisord", "--configuration", "/etc/supervisor/supervisord.conf"]
