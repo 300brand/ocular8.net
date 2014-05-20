@@ -9,6 +9,9 @@ BUILD_ORDER=(
 	spider
 	mongo
 	mongo-data-rs0
+	service
+	service-web
+	service-processing
 )
 
 for BUILD in ${BUILD_ORDER[@]}; do
