@@ -1,0 +1,79 @@
+# File managed by puppet
+
+[beanstalk]
+    server                     = "beanstalk.islay.ocular8.net:11300"
+
+[disgo]
+    serve                      = "127.0.0.1:10000"
+
+[logging]
+    enabled                    = true
+    [logging.trace]
+        file                   = ""
+        stdout                 = false
+        stderr                 = false
+        color                  = false
+    [logging.debug]
+        file                   = ""
+        stdout                 = true
+        stderr                 = false
+        color                  = false
+    [logging.info]
+        file                   = ""
+        stdout                 = true
+        stderr                 = false
+        color                  = false
+    [logging.warn]
+        file                   = ""
+        stdout                 = true
+        stderr                 = false
+        color                  = false
+    [logging.error]
+        file                   = ""
+        stdout                 = true
+        stderr                 = false
+        color                  = false
+
+[Article]
+    enabled                    = false
+
+[Feed]
+    enabled                    = false
+
+[Manager]
+    enabled                    = false
+    startup                    = true
+    [Manager.article]
+        tick                   = "15s"
+    [Manager.feed]
+        tick                   = "30s"
+        downloaddelay          = "-2h0m0s"
+
+[Publication]
+    enabled                    = false
+
+[Search]
+    enabled                    = false
+
+[Social]
+    enabled                    = false
+
+[Stats]
+    enabled                    = false
+    rate                       = 1
+    reconnect                  = "10m"
+    statsd                     = "stats.lowland.ocular8.net:8125"
+
+[StorageReader]
+    enabled                    = false
+    mongodb                    = "rs0/campbeltown.ocular8.net:27017,highland.ocular8.net:27017,island.ocular8.net:27017"
+    prefix                     = "300brand_"
+
+[StorageWriter]
+    enabled                    = false
+    mongodb                    = "rs0/campbeltown.ocular8.net:27017,highland.ocular8.net:27017,island.ocular8.net:27017"
+    prefix                     = "300brand_"
+
+[WebAPI]
+    enabled                    = false
+    httplisten                 = ":8080"
