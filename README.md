@@ -6,9 +6,7 @@ Docker.io setup for Ocular8 network
 Build Environment
 -----------------
 
-	$ sudo docker.io build -t ocular8.net/base base
-	$ sudo docker.io build -t ocular8.net/spider_data spider_data
-	$ sudo docker.io build -t ocular8.net/spider spider
+See bin/build.sh
 
 Run Environment
 ---------------
