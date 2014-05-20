@@ -1,0 +1,8 @@
+zone "20.168.192.IN-ADDR.ARPA" {
+  type master;
+  file "/etc/bind/db.20.168.192.IN-ADDR.ARPA";
+};
+zone "ocular8.net" {
+  type master;
+  file "/etc/bind/db.ocular8.net";
+};

@@ -1,0 +1,34 @@
+;
+; BIND data file for 20.168.192.IN-ADDR.ARPA zone.
+;
+$ORIGIN	20.168.192.IN-ADDR.ARPA.
+$TTL	604800
+@	IN	SOA	ns1.ocular8.net. admin.ocular8.net. (
+		1397913381		; Serial
+		604800		; Refresh
+		86400		; Retry
+		2419200		; Expire
+		604800	)	; Negative Cache TTL
+;
+@		IN	NS	ns1.
+;
+17		IN	PTR	campbeltown.ocular8.net.
+18		IN	PTR	highland.ocular8.net.
+19		IN	PTR	island.ocular8.net.
+20		IN	PTR	lowland.ocular8.net.
+21		IN	PTR	islay.ocular8.net.
+22		IN	PTR	pipod00.ocular8.net.
+65		IN	PTR	rpi-0000.node.pipod00.ocular8.net.
+66		IN	PTR	rpi-0001.node.pipod00.ocular8.net.
+67		IN	PTR	rpi-0002.node.pipod00.ocular8.net.
+68		IN	PTR	rpi-0003.node.pipod00.ocular8.net.
+69		IN	PTR	rpi-0004.node.pipod00.ocular8.net.
+70		IN	PTR	rpi-0005.node.pipod00.ocular8.net.
+71		IN	PTR	rpi-0006.node.pipod00.ocular8.net.
+72		IN	PTR	rpi-0007.node.pipod00.ocular8.net.
+73		IN	PTR	rpi-0008.node.pipod00.ocular8.net.
+74		IN	PTR	rpi-0009.node.pipod00.ocular8.net.
+75		IN	PTR	rpi-000a.node.pipod00.ocular8.net.
+76		IN	PTR	rpi-000b.node.pipod00.ocular8.net.
+77		IN	PTR	rpi-000c.node.pipod00.ocular8.net.
+78		IN	PTR	rpi-000d.node.pipod00.ocular8.net.
