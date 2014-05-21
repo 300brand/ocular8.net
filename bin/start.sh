@@ -61,13 +61,11 @@ $DOCKER run \
 	--memory 512m \
 	ocular8.net/service-web
 
-for P in 1; do
-	$DOCKER run \
-		--detach \
-		--name service-process-${P} \
-		--publish 500$(($P + 2))0:22 \
-		--publish 500$(($P + 2))1:9001 \
-		--link beanstalk:beanstalk \
-		--memory 2g \
-		ocular8.net/service-processing
-done
+$DOCKER run \
+	--detach \
+	--name service-processing \
+	--publish 50030:22 \
+	--publish 50031:9001 \
+	--link beanstalk:beanstalk \
+	--memory 2g \
+	ocular8.net/service-processing
