@@ -5,6 +5,7 @@ DOCKER=/usr/bin/docker.io
 BUILD_ORDER=(
 	dns
 	base
+	beanstalk
 	spider_data
 	spider
 	mongo
