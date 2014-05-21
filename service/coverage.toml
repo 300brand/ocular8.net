@@ -1,7 +1,7 @@
 # File managed by puppet
 
 [beanstalk]
-    server                     = "beanstalk.islay.ocular8.net:11300"
+    server                     = "beanstalk:11300"
 
 [disgo]
     serve                      = "127.0.0.1:10000"
@@ -66,12 +66,12 @@
 
 [StorageReader]
     enabled                    = false
-    mongodb                    = "rs0/campbeltown.ocular8.net:27017,highland.ocular8.net:27017,island.ocular8.net:27017"
+    mongodb                    = "campbeltown.ocular8.net:27017,highland.ocular8.net:27017,island.ocular8.net:27017"
     prefix                     = "300brand_"
 
 [StorageWriter]
     enabled                    = false
-    mongodb                    = "rs0/campbeltown.ocular8.net:27017,highland.ocular8.net:27017,island.ocular8.net:27017"
+    mongodb                    = "campbeltown.ocular8.net:27017,highland.ocular8.net:27017,island.ocular8.net:27017"
     prefix                     = "300brand_"
 
 [WebAPI]
