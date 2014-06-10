@@ -1,7 +1,6 @@
 #!/bin/bash
 
 DOCKER=/usr/bin/docker.io
-DOCKER='echo docker'
 DATA_DIR=/home/data
 IP=$(ip addr show dev $(ip route list table main | awk '$1 == "default" {print $NF}') | awk '$1 == "inet" { sub(/\/[0-9]+/, "", $2); print $2 }')
 FULL_HOST=$(hostname -f)
@@ -43,7 +42,7 @@ docker run \
 	${PUBLISH[22]} \
 	${PUBLISH[9001]} \
 	--publish 27017:27017 \
-	--volume /home/data/mongo/rs0:/data \
+	--volume ${DATA_DIR}/mongo:/data \
 	ocular8.net/mongo-data-rs0
 
 mkdir -p /home/data/etcd
@@ -58,7 +57,7 @@ docker run \
 	${PUBLISH[4001]} \
 	${PUBLISH[7001]} \
 	${PUBLISH[9001]} \
-	--volume /home/data/etcd:/data \
+	--volume ${DATA_DIR}/etcd:/data \
 	ocular8.net/etcd
 
 docker run \
