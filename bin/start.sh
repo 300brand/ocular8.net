@@ -6,10 +6,15 @@ DATA_DIR=/home/data
 IP=$(ip addr show dev $(ip route list table main | awk '$1 == "default" {print $NF}') | awk '$1 == "inet" { sub(/\/[0-9]+/, "", $2); print $2 }')
 FULL_HOST=$(hostname -f)
 
+ETCD_SERVERS=(
+	etcd.campbeltown.ocular8.net
+	etcd.highland.ocular8.net
+	etcd.island.ocular8.net
+)
+
 PORT_PREFIX=500
 PRIVATE_PORTS=( 22 9001 4001 7001 $(seq 6060 6067) $(seq 10000 10007) )
-declare -a PORTMAP
-declare -a PORT
+declare -a PORTS
 declare -a PUBLISH
 
 port () {
@@ -19,9 +24,10 @@ port () {
 setports () {
 	for I in $(seq 0 $((${#PRIVATE_PORTS[@]} - 1))); do
 		P=${PRIVATE_PORTS[$I]}
-		PORT[$P]=$(port $I)
-		PORTMAP[$P]=${PORT[$P]}:$P
-		PUBLISH[$P]="--publish ${PORTMAP[$P]} --env PORT_${P}=${PORT[$P]}"
+		PORT=$(port $I)
+		PORTMAP=${PORT}:${P}
+		PORTS[$P]=$PORT
+		PUBLISH[$P]="--publish $PORTMAP} --env PORT_${P}=${PORT}"
 	done
 }
 
@@ -33,6 +39,7 @@ docker () {
 
 setports
 
+mkdir -p /home/data/mongo/rs0
 docker run \
 	--detach \
 	--hostname mongo-data-rs0.$FULL_HOST \
@@ -42,19 +49,22 @@ docker run \
 	${PUBLISH[22]} \
 	${PUBLISH[9001]} \
 	--publish 27017:27017 \
-	--volume /home/data/mongod-rs0:/data \
+	--volume /home/data/mongo/rs0:/data \
 	ocular8.net/mongo-data-rs0
 
+mkdir -p /home/data/etcd
 docker run \
 	--detach \
 	--hostname etcd.$FULL_HOST \
 	--memory 2g \
 	--name etcd \
 	--env MACHINE_IP=$IP \
+	--env DISCOVERY=https://discovery.etcd.io/ae99102a81a29345e515cfd48ccad561 \
 	${PUBLISH[22]} \
 	${PUBLISH[4001]} \
 	${PUBLISH[7001]} \
 	${PUBLISH[9001]} \
+	--volume /home/data/etcd:/data
 	ocular8.net/etcd
 
 docker run \
