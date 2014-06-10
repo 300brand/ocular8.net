@@ -9,6 +9,7 @@ RUN        GOPATH=/usr/local go get -u -v github.com/coreos/etcd # LAST_UPDATE: 
 ADD        etcd.conf /etc/supervisor/conf.d/etcd.conf
 
 RUN        mkdir /data
+RUN        chown nobody:nogroup /data
 VOLUME     ["/data"]
 EXPOSE     4001
 EXPOSE     7001
