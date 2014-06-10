@@ -6,12 +6,6 @@ DATA_DIR=/home/data
 IP=$(ip addr show dev $(ip route list table main | awk '$1 == "default" {print $NF}') | awk '$1 == "inet" { sub(/\/[0-9]+/, "", $2); print $2 }')
 FULL_HOST=$(hostname -f)
 
-ETCD_SERVERS=(
-	etcd.campbeltown.ocular8.net
-	etcd.highland.ocular8.net
-	etcd.island.ocular8.net
-)
-
 PORT_PREFIX=500
 PRIVATE_PORTS=( 22 9001 4001 7001 $(seq 6060 6067) $(seq 10000 10007) )
 declare -a PORTS
