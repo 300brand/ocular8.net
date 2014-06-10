@@ -7,9 +7,10 @@ IP=$(ip addr show dev $(ip route list table main | awk '$1 == "default" {print $
 FULL_HOST=$(hostname -f)
 
 PORT_PREFIX=500
-PRIVATE_PORTS=( 22 9001 4001 7001 $(seq 10000 10007) )
+PRIVATE_PORTS=( 22 9001 4001 7001 $(seq 6060 6067) $(seq 10000 10007) )
 declare -a PORTMAP
 declare -a PORT
+declare -a PUBLISH
 
 port () {
 	printf "%3d%02d" $PORT_PREFIX $1
@@ -20,6 +21,7 @@ setports () {
 		P=${PRIVATE_PORTS[$I]}
 		PORT[$P]=$(port $I)
 		PORTMAP[$P]=${PORT[$P]}:$P
+		PUBLISH[$P]="--publish ${PORTMAP[$P]} --env PORT_${P}=${PORT[$P]}"
 	done
 }
 
@@ -36,39 +38,38 @@ docker run \
 	--hostname mongo-data-rs0.$FULL_HOST \
 	--memory 16g \
 	--name mongod-rs0 \
-	--publish ${PORTMAP[22]} \
-	--publish ${PORTMAP[9001]} \
-	--publish 27017:27017 \
 	--env MACHINE_IP=$IP \
+	${PUBLISH[22]} \
+	${PUBLISH[9001]} \
+	--publish 27017:27017 \
 	--volume /home/data/mongod-rs0:/data \
 	ocular8.net/mongo-data-rs0
 
 docker run \
 	--detach \
 	--hostname etcd.$FULL_HOST \
+	--memory 2g \
 	--name etcd \
-	--publish ${PORTMAP[22]} \
-	--publish ${PORTMAP[4001]} \
-	--publish ${PORTMAP[7001]} \
-	--publish ${PORTMAP[9001]} \
 	--env MACHINE_IP=$IP \
-	--env PORT_4001=${PORT[4001]} \
-	--env PORT_7001=${PORT[7001]} \
+	${PUBLISH[22]} \
+	${PUBLISH[4001]} \
+	${PUBLISH[7001]} \
+	${PUBLISH[9001]} \
 	ocular8.net/etcd
 
 docker run \
 	--detach \
 	--hostname service-web.$FULL_HOST \
-	--memory 512m \
+	--memory 2g \
 	--name service-web \
-	--publish ${PORTMAP[22]} \
-	--publish 8080:8080 \
-	--publish ${PORTMAP[9001]} \
-	--publish ${PORTMAP[10000]} \
-	--publish ${PORTMAP[10001]} \
 	--env MACHINE_IP=$IP \
-	--env PORT_10000=${PORT[10000]} \
-	--env PORT_10001=${PORT[10001]} \
+	${PUBLISH[22]} \
+	${PUBLISH[6060]} \
+	${PUBLISH[6061]} \
+	${PUBLISH[9001]} \
+	${PUBLISH[10000]} \
+	${PUBLISH[10001]} \
+	--publish 8080:8080 \
 	ocular8.net/service-web
 
 docker run \
@@ -76,25 +77,25 @@ docker run \
 	--hostname service-processing.$FULL_HOST \
 	--memory 2g \
 	--name service-processing \
-	--publish ${PORTMAP[22]} \
-	--publish ${PORTMAP[9001]} \
-	--publish ${PORTMAP[10000]} \
-	--publish ${PORTMAP[10001]} \
-	--publish ${PORTMAP[10002]} \
-	--publish ${PORTMAP[10003]} \
-	--publish ${PORTMAP[10004]} \
-	--publish ${PORTMAP[10005]} \
-	--publish ${PORTMAP[10006]} \
-	--publish ${PORTMAP[10007]} \
 	--env MACHINE_IP=$IP \
-	--env PORT_10000=${PORT[10000]} \
-	--env PORT_10001=${PORT[10001]} \
-	--env PORT_10002=${PORT[10002]} \
-	--env PORT_10003=${PORT[10003]} \
-	--env PORT_10004=${PORT[10004]} \
-	--env PORT_10005=${PORT[10005]} \
-	--env PORT_10006=${PORT[10006]} \
-	--env PORT_10007=${PORT[10007]} \
+	${PUBLISH[22]} \
+	${PUBLISH[9001]} \
+	${PUBLISH[6060]} \
+	${PUBLISH[6061]} \
+	${PUBLISH[6062]} \
+	${PUBLISH[6063]} \
+	${PUBLISH[6064]} \
+	${PUBLISH[6065]} \
+	${PUBLISH[6066]} \
+	${PUBLISH[6067]} \
+	${PUBLISH[10000]} \
+	${PUBLISH[10001]} \
+	${PUBLISH[10002]} \
+	${PUBLISH[10003]} \
+	${PUBLISH[10004]} \
+	${PUBLISH[10005]} \
+	${PUBLISH[10006]} \
+	${PUBLISH[10007]} \
 	ocular8.net/service-processing
 
 # docker run \
