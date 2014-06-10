@@ -2,6 +2,39 @@
 
 DOCKER=/usr/bin/docker.io
 DATA_DIR=/home/data
+IP=$(/sbin/ifconfig eth0 | awk '/inet / { sub(/addr:/, ""); print $2 }')
+
+$DOCKER run \
+	--detach \
+	--hostname mongo-data-rs0.`hostname`.ocular8.net \
+	--name mongod-rs0 \
+	--publish 50000:22 \
+	--publish 50001:9001 \
+	--publish 27017:27017 \
+	--memory 16g \
+	--volume /home/data/mongod-rs0:/data \
+	ocular8.net/mongo-data-rs0
+
+$DOCKER run \
+	--detach \
+	--hostname service-web.`hostname`.ocular8.net \
+	--name service-web \
+	--publish 50000:22 \
+	--publish 50001:9001 \
+	--publish 8080:8080 \
+	--link beanstalk:beanstalk \
+	--memory 512m \
+	ocular8.net/service-web
+
+$DOCKER run \
+	--detach \
+	--hostname service-processing.`hostname`.ocular8.net \
+	--name service-processing \
+	--publish 50000:22 \
+	--publish 50001:9001 \
+	--link beanstalk:beanstalk \
+	--memory 2g \
+	ocular8.net/service-processing
 
 # $DOCKER run \
 # 	--detach \
@@ -30,42 +63,3 @@ DATA_DIR=/home/data
 # 	--hostname dns.`hostname -f` \
 # 	--name dns \
 # 	ocular8.net/dns
-
-$DOCKER run \
-	--detach \
-	--hostname mongo-data-rs0.`hostname`.ocular8.net \
-	--name mongo-data-rs0.`hostname`.ocular8.net \
-	--publish 50000:22 \
-	--publish 50001:9001 \
-	--publish 27017:27017 \
-	--memory 16g \
-	--volume /home/data/mongo:/data \
-	ocular8.net/mongo-data-rs0
-
-$DOCKER run \
-	--detach \
-	--name beanstalk \
-	--publish 50010:22 \
-	--publish 50011:9001 \
-	--publish 11300:11300 \
-	--memory 512m \
-	ocular8.net/beanstalk
-
-$DOCKER run \
-	--detach \
-	--name service-web \
-	--publish 50020:22 \
-	--publish 50021:9001 \
-	--publish 8080:8080 \
-	--link beanstalk:beanstalk \
-	--memory 512m \
-	ocular8.net/service-web
-
-$DOCKER run \
-	--detach \
-	--name service-processing \
-	--publish 50030:22 \
-	--publish 50031:9001 \
-	--link beanstalk:beanstalk \
-	--memory 2g \
-	ocular8.net/service-processing
