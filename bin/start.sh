@@ -53,6 +53,7 @@ docker run \
 	--name etcd \
 	--env MACHINE_IP=$IP \
 	--env DISCOVERY=https://discovery.etcd.io/ae99102a81a29345e515cfd48ccad561 \
+	--env FULL_HOSTNAME=etcd.$FULL_HOST \
 	${PUBLISH[22]} \
 	${PUBLISH[4001]} \
 	${PUBLISH[7001]} \
