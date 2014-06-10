@@ -12,3 +12,5 @@ RUN        mkdir /data
 VOLUME     ["/data"]
 EXPOSE     4001
 EXPOSE     7001
+
+CMD ["/usr/bin/supervisord", "--configuration", "/etc/supervisor/supervisord.conf"]
