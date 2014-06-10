@@ -21,7 +21,7 @@ setports () {
 		PORT=$(port $I)
 		PORTMAP=${PORT}:${P}
 		PORTS[$P]=$PORT
-		PUBLISH[$P]="--publish $PORTMAP} --env PORT_${P}=${PORT}"
+		PUBLISH[$P]="--publish $PORTMAP --env PORT_${P}=${PORT}"
 	done
 }
 
@@ -58,7 +58,7 @@ docker run \
 	${PUBLISH[4001]} \
 	${PUBLISH[7001]} \
 	${PUBLISH[9001]} \
-	--volume /home/data/etcd:/data
+	--volume /home/data/etcd:/data \
 	ocular8.net/etcd
 
 docker run \
