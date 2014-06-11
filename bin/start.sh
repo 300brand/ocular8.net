@@ -46,6 +46,7 @@ docker run \
 	ocular8.net/mongo-data-rs0
 
 mkdir -p /home/data/etcd
+ETCD_PORT=${PORTS[4001]}
 docker run \
 	--detach \
 	--hostname etcd.$FULL_HOST \
@@ -67,6 +68,7 @@ docker run \
 	--memory 2g \
 	--name service-web \
 	--env MACHINE_IP=$IP \
+	--env ETCD_SERVER=etcd.${FULL_HOST}:${ETCD_PORT} \
 	${PUBLISH[22]} \
 	${PUBLISH[6060]} \
 	${PUBLISH[6061]} \
@@ -82,6 +84,7 @@ docker run \
 	--memory 2g \
 	--name service-processing \
 	--env MACHINE_IP=$IP \
+	--env ETCD_SERVER=etcd.${FULL_HOST}:${ETCD_PORT} \
 	${PUBLISH[22]} \
 	${PUBLISH[9001]} \
 	${PUBLISH[6060]} \
