@@ -1,4 +1,3 @@
-# File managed by puppet
 [disgo]
     listen                     = ":10000"
     broadcast                  = "127.0.0.1:10000"
