@@ -84,7 +84,7 @@ docker run \
 	--memory 2g \
 	--name service-processing \
 	--env MACHINE_IP=$IP \
-	--env ETCD_SERVER=etcd.${FULL_HOST}:${ETCD_PORT} \
+	--env ETCD_SERVER=http://etcd.${FULL_HOST}:${ETCD_PORT} \
 	${PUBLISH[22]} \
 	${PUBLISH[9001]} \
 	${PUBLISH[6060]} \
