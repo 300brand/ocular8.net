@@ -1,10 +1,9 @@
 # File managed by puppet
-
-[beanstalk]
-    server                     = "beanstalk:11300"
-
 [disgo]
-    serve                      = "127.0.0.1:10000"
+    listen                     = ":10000"
+    broadcast                  = "127.0.0.1:10000"
+    [disgo.etcd]
+        servers                = "127.0.0.1:4001"
 
 [logging]
     enabled                    = true
