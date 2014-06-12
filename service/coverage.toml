@@ -3,6 +3,7 @@
     broadcast                  = "127.0.0.1:10000"
     [disgo.etcd]
         servers                = "127.0.0.1:4001"
+        ttl                    = 10
 
 [logging]
     enabled                    = true
