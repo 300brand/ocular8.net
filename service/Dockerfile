@@ -7,7 +7,4 @@ ADD        golang.sh /etc/profile.d/golang.sh
 RUN        GOPATH=/usr/local go get -u -v github.com/300brand/coverageservices # v1.6.0
 ADD        coverage.toml /etc/coverage.toml
 
-ADD        runservice.sh /usr/local/bin/runservice.sh
-RUN        chmod +x /usr/local/bin/runservice.sh
-
 ONBUILD CMD ["/usr/bin/supervisord", "--configuration", "/etc/supervisor/supervisord.conf"]
