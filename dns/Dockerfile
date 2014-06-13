@@ -3,7 +3,7 @@ MAINTAINER jake@300brand.com
 
 ENV        DEBIAN_FRONTEND noninteractive
 
-RUN        echo 'Acquire::http { Proxy "http://192.168.20.21:3142"; };' >> /etc/apt/apt.conf.d/01proxy
+RUN        ping -c1 -w1 192.168.20.21 && echo 'Acquire::http { Proxy "http://192.168.20.21:3142"; };' >> /etc/apt/apt.conf.d/01proxy || true
 RUN        sed 's/main$/main universe/' -i /etc/apt/sources.list
 RUN        apt-get update
 RUN        apt-get install -y bind9
