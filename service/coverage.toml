@@ -3,7 +3,7 @@
     broadcast                  = "127.0.0.1:10000"
     [disgo.etcd]
         servers                = "127.0.0.1:4001"
-        ttl                    = 10
+        ttl                    = 15
 
 [logging]
     enabled                    = true
@@ -53,6 +53,7 @@
 
 [Search]
     enabled                    = false
+    mongodb                    = "campbeltown.ocular8.net:27017,highland.ocular8.net:27017,island.ocular8.net:27017"
 
 [Social]
     enabled                    = false
