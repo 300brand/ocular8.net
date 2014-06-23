@@ -43,7 +43,7 @@
     enabled                    = false
     startup                    = true
     [Manager.article]
-        tick                   = "15s"
+        tick                   = "5s"
     [Manager.feed]
         tick                   = "30s"
         downloaddelay          = "-2h0m0s"
