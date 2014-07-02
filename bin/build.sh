@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOCKER=/usr/bin/docker.io
+DOCKER=$( [[ -x /usr/bin/docker.io ]] && echo /usr/bin/docker.io || echo /usr/bin/docker )
 
 BUILD_ORDER=(
 	dns
