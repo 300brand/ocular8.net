@@ -6,6 +6,12 @@ IP=$(ip addr show dev $(ip route list table main | awk '$1 == "default" {print $
 FULL_HOST=$(hostname).ocular8.net
 
 PORT_PREFIX=500
+if [ $HOSTNAME -eq "highland" ]; then
+	PORT_PREFIX=$(($PORT_PREFIX + 10))
+elif [ $HOSTNAME -eq "island" ]; then
+	PORT_PREFIX=$(($PORT_PREFIX + 20))
+fi
+
 PRIVATE_PORTS=( 22 9001 4001 7001 $(seq 6060 6067) $(seq 10000 10007) )
 declare -a PORTS
 declare -a PUBLISH
