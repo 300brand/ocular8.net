@@ -12,7 +12,7 @@ elif [ $HOSTNAME -eq "island" ]; then
 	PORT_PREFIX=$(($PORT_PREFIX + 20))
 fi
 
-PRIVATE_PORTS=( 22 9001 4001 7001 $(seq 6060 6067) $(seq 10000 10007) )
+PRIVATE_PORTS=( 22 9001 4001 7001 8080 $(seq 6060 6067) $(seq 10000 10007) )
 declare -a PORTS
 declare -a PUBLISH
 
@@ -78,10 +78,10 @@ docker run \
 	${PUBLISH[22]} \
 	${PUBLISH[6060]} \
 	${PUBLISH[6061]} \
+	${PUBLISH[8080]} \
 	${PUBLISH[9001]} \
 	${PUBLISH[10000]} \
 	${PUBLISH[10001]} \
-	--publish 8080:8080 \
 	ocular8.net/service-web
 
 docker run \
