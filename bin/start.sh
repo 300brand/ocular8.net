@@ -115,7 +115,7 @@ docker run \
 
 docker run \
 	--detach \
-	--hostname mongo-monitor-${hostname} \
+	--hostname mongo-monitor-$(hostname) \
 	--memory 256m \
 	--name mongo-monitoring \
 	--env MACHINE_IP=$IP \
