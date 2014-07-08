@@ -6,9 +6,9 @@ IP=$(ip addr show dev $(ip route list table main | awk '$1 == "default" {print $
 FULL_HOST=$(hostname).ocular8.net
 
 PORT_PREFIX=500
-if [ $HOSTNAME -eq "highland" ]; then
+if [ $HOSTNAME == "highland" ]; then
 	PORT_PREFIX=$(($PORT_PREFIX + 10))
-elif [ $HOSTNAME -eq "island" ]; then
+elif [ $HOSTNAME == "island" ]; then
 	PORT_PREFIX=$(($PORT_PREFIX + 20))
 fi
 
