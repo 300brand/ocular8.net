@@ -13,6 +13,7 @@ BUILD_ORDER=(
 	service
 	service-web
 	service-processing
+	mongo-monitoring
 )
 
 for BUILD in ${BUILD_ORDER[@]}; do
