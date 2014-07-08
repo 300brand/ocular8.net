@@ -41,7 +41,7 @@ setports
 mkdir -p /home/data/mongo/rs0
 docker run \
 	--detach \
-	--hostname mongo-data-rs0.$FULL_HOST \
+	--hostname rs0-$(hostname).$FULL_HOST \
 	--memory 16g \
 	--name mongod-rs0 \
 	--env MACHINE_IP=$IP \
