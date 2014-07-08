@@ -53,6 +53,8 @@ docker run \
 
 mkdir -p /home/data/etcd
 ETCD_PORT=${PORTS[4001]}
+ETCD_SERVERS=http://etcd.campbeltown.ocular8.net:50${ETCD_PORT:2},http://etcd.highland.ocular8.net:51${ETCD_PORT:2},http://etcd.island.ocular8.net:52${ETCD_PORT:2}
+
 docker run \
 	--detach \
 	--hostname etcd.$FULL_HOST \
@@ -74,7 +76,7 @@ docker run \
 	--memory 2g \
 	--name service-web \
 	--env MACHINE_IP=$IP \
-	--env ETCD_SERVER=http://etcd.${FULL_HOST}:${ETCD_PORT} \
+	--env ETCD_SERVER=$ETCD_SERVERS \
 	${PUBLISH[22]} \
 	${PUBLISH[6060]} \
 	${PUBLISH[6061]} \
@@ -90,7 +92,7 @@ docker run \
 	--memory 2g \
 	--name service-processing \
 	--env MACHINE_IP=$IP \
-	--env ETCD_SERVER=http://etcd.${FULL_HOST}:${ETCD_PORT} \
+	--env ETCD_SERVER=$ETCD_SERVERS \
 	${PUBLISH[22]} \
 	${PUBLISH[9001]} \
 	${PUBLISH[6060]} \
@@ -110,6 +112,16 @@ docker run \
 	${PUBLISH[10006]} \
 	${PUBLISH[10007]} \
 	ocular8.net/service-processing
+
+docker run \
+	--detach \
+	--hostname mongo-monitoring.$FULL_HOST \
+	--memory 256m \
+	--name mongo-monitoring \
+	--env MACHINE_IP=$IP \
+	${PUBLISH[22]} \
+	${PUBLISH[9001]} \
+	ocular8.net/mongo-monitoring
 
 # docker run \
 # 	--detach \
