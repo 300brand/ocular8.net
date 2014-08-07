@@ -53,7 +53,7 @@ docker run \
 
 mkdir -p /home/data/etcd
 ETCD_PORT=${PORTS[4001]}
-ETCD_SERVERS=http://etcd.campbeltown.ocular8.net:50${ETCD_PORT:2},http://etcd.highland.ocular8.net:51${ETCD_PORT:2},http://etcd.island.ocular8.net:52${ETCD_PORT:2}
+ETCD_SERVERS=http://192.168.20.17:50${ETCD_PORT:2},http://192.168.20.18:51${ETCD_PORT:2},http://192.168.20.19:52${ETCD_PORT:2}
 
 docker run \
 	--detach \
