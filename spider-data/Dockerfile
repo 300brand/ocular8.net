@@ -1,10 +1,7 @@
 FROM       ocular8.net/base
 MAINTAINER jake@300brand.net
 
-RUN        apt-get install -y mysql-server beanstalkd
-
-ADD        beanstalkd.conf /etc/supervisor/conf.d/beanstalkd.conf
-EXPOSE     11300
+RUN        apt-get install -y mysql-server
 
 ADD        mysqld.cnf /etc/mysql/conf.d/mysqld.cnf
 RUN        chmod 0664 /etc/mysql/conf.d/mysqld.cnf
