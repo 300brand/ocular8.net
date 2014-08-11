@@ -6,3 +6,4 @@ ADD        golang.sh /etc/profile.d/golang.sh
 
 RUN        GOPATH=/usr/local go get -u -v github.com/300brand/spider # LAST_UPDATE: Aug 08, 2014 12:00
 ADD        spider.conf /etc/supervisor/conf.d/spider.conf
+ENV        MYSQL_HOST 192.168.20.15:30002
