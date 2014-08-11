@@ -7,4 +7,4 @@ ADD        golang.sh /etc/profile.d/golang.sh
 RUN        GOPATH=/usr/local go get -u -v github.com/300brand/spider-rss # v1.0.0
 ADD        spider-rss.conf /etc/supervisor/conf.d/spider-rss.conf
 ENV        MYSQL_HOST 192.168.20.15:30002
-EXPOSE     80
+EXPOSE     8080
