@@ -9,4 +9,5 @@ ADD        mysql_setup.sh /root/mysql_setup.sh
 RUN        chmod +x /root/mysql_setup.sh
 RUN        /root/mysql_setup.sh
 ADD        mysql.conf /etc/supervisor/conf.d/mysql.conf
+VOLUME     ['/var/lib/mysql']
 EXPOSE     3306
