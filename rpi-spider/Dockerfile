@@ -1,4 +1,4 @@
-FROM       ocular8.net/rpi-base
+FROM       docker.ocular8.net/rpi-base
 MAINTAINER jake@300brand.com
 
 RUN        apt-get install -y golang bzr git mercurial libxml2-dev pkg-config libsqlite3-dev
