@@ -3,7 +3,8 @@
 
 shopt -s nullglob
 DIR=/var/lib/mysql
-if [[ `echo ${DIR}/*` -z ]]; then
+DIR_FILES=`echo ${DIR}/*`
+if [ -z $DIR_FILES ]; then
 	echo "New installation: chowning, then installing to ${DIR}"
 	chown mysql:mysql $DIR
 	mysql_install_db --user=mysql
