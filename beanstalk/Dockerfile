@@ -1,4 +1,4 @@
-FROM       ocular8.net/base
+FROM       docker.ocular8.net/base
 MAINTAINER jake@300brand.net
 
 RUN        apt-get install -y beanstalkd

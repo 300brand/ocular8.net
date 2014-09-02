@@ -6,7 +6,7 @@ BUILD_ORDER=(
 	dns
 	base
 	etcd
-	spider_data
+	spider-data
 	spider
 	mongo
 	mongo-data-rs0
@@ -17,7 +17,7 @@ BUILD_ORDER=(
 )
 
 for BUILD in ${BUILD_ORDER[@]}; do
-	$DOCKER build -t ocular8.net/$BUILD $BUILD
+	$DOCKER build -t docker.ocular8.net/$BUILD $BUILD
 	RET=$?
 	if [ $RET -ne 0 ]; then
 		exit $RET

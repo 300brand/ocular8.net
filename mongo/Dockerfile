@@ -1,4 +1,4 @@
-FROM       ocular8.net/base
+FROM       docker.ocular8.net/base
 MAINTAINER jake@300brand.com
 
 RUN        apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
