@@ -49,7 +49,7 @@ docker run \
 	${PUBLISH[9001]} \
 	--publish 27017:27017 \
 	--volume ${DATA_DIR}/mongo:/data \
-	ocular8.net/mongo-data-rs0
+	docker.ocular8.net/mongo-data-rs0
 
 mkdir -p /home/data/etcd
 ETCD_PORT=${PORTS[4001]}
@@ -68,7 +68,7 @@ docker run \
 	${PUBLISH[7001]} \
 	${PUBLISH[9001]} \
 	--volume ${DATA_DIR}/etcd:/data \
-	ocular8.net/etcd
+	docker.ocular8.net/etcd
 
 docker run \
 	--detach \
@@ -84,7 +84,7 @@ docker run \
 	${PUBLISH[9001]} \
 	${PUBLISH[10000]} \
 	${PUBLISH[10001]} \
-	ocular8.net/service-web
+	docker.ocular8.net/service-web
 
 docker run \
 	--detach \
@@ -111,7 +111,7 @@ docker run \
 	${PUBLISH[10005]} \
 	${PUBLISH[10006]} \
 	${PUBLISH[10007]} \
-	ocular8.net/service-processing
+	docker.ocular8.net/service-processing
 
 docker run \
 	--detach \
@@ -121,7 +121,7 @@ docker run \
 	--env MACHINE_IP=$IP \
 	${PUBLISH[22]} \
 	${PUBLISH[9001]} \
-	ocular8.net/mongo-monitoring
+	docker.ocular8.net/mongo-monitoring
 
 # docker run \
 # 	--detach \
@@ -132,7 +132,7 @@ docker run \
 # 	--name spider_data \
 # 	--volume $DATA_DIR/spider_data/mysql:/var/lib/mysql \
 # 	--hostname data.spider.ocular8.net \
-# 	ocular8.net/spider_data
+# 	docker.ocular8.net/spider_data
 
 # docker run \
 # 	--detach \
@@ -141,7 +141,7 @@ docker run \
 # 	--publish 30102:8080 \
 # 	--hostname crawler01.spider.ocular8.net \
 # 	--name crawler01.spider.ocular8.net \
-# 	ocular8.net/spider
+# 	docker.ocular8.net/spider
 
 # docker run \
 # 	--detach \
@@ -149,4 +149,4 @@ docker run \
 # 	--publish 53:53/udp \
 # 	--hostname dns.`hostname -f` \
 # 	--name dns \
-# 	ocular8.net/dns
+# 	docker.ocular8.net/dns
