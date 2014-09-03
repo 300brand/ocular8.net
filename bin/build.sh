@@ -11,13 +11,16 @@ BUILD_ORDER=(
 	mongo
 	mongo-data-rs0
 	service
-	service-web
-	service-processing
 	mongo-monitoring
 )
 
 for BUILD in ${BUILD_ORDER[@]}; do
 	$DOCKER build -t docker.ocular8.net/$BUILD $BUILD
+	RET=$?
+	if [ $RET -ne 0 ]; then
+		exit $RET
+	fi
+	$DOCKER push docker.ocular8.net/$BUILD
 	RET=$?
 	if [ $RET -ne 0 ]; then
 		exit $RET

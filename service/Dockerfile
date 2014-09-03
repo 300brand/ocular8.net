@@ -9,4 +9,4 @@ ADD        coverage.toml /etc/coverage.toml
 
 ADD        service-upgrade.conf /etc/supervisor/conf.d/service-upgrade.conf
 
-ONBUILD CMD ["/usr/bin/supervisord", "--configuration", "/etc/supervisor/supervisord.conf"]
+ADD        coverageservices.conf /etc/supervisor/conf.d/coverageservices.conf

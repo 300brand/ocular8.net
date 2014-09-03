@@ -12,7 +12,7 @@ elif [ $HOSTNAME == "island" ]; then
 	PORT_PREFIX=$(($PORT_PREFIX + 20))
 fi
 
-PRIVATE_PORTS=( 22 9001 4001 7001 8080 $(seq 6060 6067) $(seq 10000 10007) )
+PRIVATE_PORTS=( 22 9001 4001 7001 8080 $(seq 6060 6069) $(seq 10000 10009) )
 declare -a PORTS
 declare -a PUBLISH
 
@@ -72,28 +72,13 @@ docker run \
 
 docker run \
 	--detach \
-	--hostname service-web.$FULL_HOST \
+	--hostname service.$FULL_HOST \
 	--memory 2g \
-	--name service-web \
+	--name service \
 	--env MACHINE_IP=$IP \
 	--env ETCD_SERVER=$ETCD_SERVERS \
 	${PUBLISH[22]} \
-	${PUBLISH[6060]} \
-	${PUBLISH[6061]} \
 	${PUBLISH[8080]} \
-	${PUBLISH[9001]} \
-	${PUBLISH[10000]} \
-	${PUBLISH[10001]} \
-	docker.ocular8.net/service-web
-
-docker run \
-	--detach \
-	--hostname service-processing.$FULL_HOST \
-	--memory 2g \
-	--name service-processing \
-	--env MACHINE_IP=$IP \
-	--env ETCD_SERVER=$ETCD_SERVERS \
-	${PUBLISH[22]} \
 	${PUBLISH[9001]} \
 	${PUBLISH[6060]} \
 	${PUBLISH[6061]} \
@@ -103,6 +88,8 @@ docker run \
 	${PUBLISH[6065]} \
 	${PUBLISH[6066]} \
 	${PUBLISH[6067]} \
+	${PUBLISH[6068]} \
+	${PUBLISH[6069]} \
 	${PUBLISH[10000]} \
 	${PUBLISH[10001]} \
 	${PUBLISH[10002]} \
@@ -111,7 +98,9 @@ docker run \
 	${PUBLISH[10005]} \
 	${PUBLISH[10006]} \
 	${PUBLISH[10007]} \
-	docker.ocular8.net/service-processing
+	${PUBLISH[10008]} \
+	${PUBLISH[10009]} \
+	docker.ocular8.net/service
 
 docker run \
 	--detach \
@@ -122,31 +111,3 @@ docker run \
 	${PUBLISH[22]} \
 	${PUBLISH[9001]} \
 	docker.ocular8.net/mongo-monitoring
-
-# docker run \
-# 	--detach \
-# 	--publish 30000:9001 \
-# 	--publish 30001:22 \
-# 	--publish 30002:3306 \
-# 	--publish 30003:11300 \
-# 	--name spider_data \
-# 	--volume $DATA_DIR/spider_data/mysql:/var/lib/mysql \
-# 	--hostname data.spider.ocular8.net \
-# 	docker.ocular8.net/spider_data
-
-# docker run \
-# 	--detach \
-# 	--publish 30100:9001 \
-# 	--publish 30101:22 \
-# 	--publish 30102:8080 \
-# 	--hostname crawler01.spider.ocular8.net \
-# 	--name crawler01.spider.ocular8.net \
-# 	docker.ocular8.net/spider
-
-# docker run \
-# 	--detach \
-# 	--publish 53:53 \
-# 	--publish 53:53/udp \
-# 	--hostname dns.`hostname -f` \
-# 	--name dns \
-# 	docker.ocular8.net/dns
