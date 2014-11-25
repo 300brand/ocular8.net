@@ -16,6 +16,9 @@ PRIVATE_PORTS=( 22 9001 4001 7001 8080 $(seq 6060 6069) $(seq 10000 10009) )
 declare -a PORTS
 declare -a PUBLISH
 
+PUBLISH[9200]="--publish 9200:9200"
+PUBLISH[9300]="--publish 9300:9300"
+
 port () {
 	printf "%3d%02d" $PORT_PREFIX $1
 }
@@ -111,3 +114,13 @@ docker run \
 	${PUBLISH[22]} \
 	${PUBLISH[9001]} \
 	docker.ocular8.net/mongo-monitoring
+
+docker run \
+	--detach \
+	--hostname elastic-$(hostname) \
+	--memory 512m \
+	--name elasticsearch \
+	--env MACHINE_IP=$IP \
+	${PUBLISH[9200]} \
+	${PUBLISH[9300]} \
+	dockerfile/elasticsearch
