@@ -115,6 +115,7 @@ docker run \
 	${PUBLISH[9001]} \
 	docker.ocular8.net/mongo-monitoring
 
+mkdir -p ${DATA_DIR}/elastic
 ELASTIC_CONFIG=${DATA_DIR}/elastic/elasticsearch.yml
 cp `dirname $0`/../elastic/elasticsearch.yml $ELASTIC_CONFIG
 sed -i s/@PUBLISH_HOST@/$IP/ $ELASTIC_CONFIG
