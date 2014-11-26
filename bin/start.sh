@@ -119,7 +119,7 @@ mkdir -p ${DATA_DIR}/elastic
 ELASTIC_CONFIG=${DATA_DIR}/elastic/elasticsearch.yml
 cp `dirname $0`/../elastic/elasticsearch.yml $ELASTIC_CONFIG
 sed -i s/@PUBLISH_HOST@/$IP/ $ELASTIC_CONFIG
-sed -i s/@NODE_NAME@/$IP/ $ELASTIC_CONFIG
+sed -i s/@NODE_NAME@/$(hostname)/ $ELASTIC_CONFIG
 if [ $IP != "192.168.20.17" ]; then
 	sed -i s/@PING@/192.168.20.17/ $ELASTIC_CONFIG
 fi
