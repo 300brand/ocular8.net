@@ -115,12 +115,28 @@ docker run \
 	${PUBLISH[9001]} \
 	docker.ocular8.net/mongo-monitoring
 
+ELASTIC_CONFIG=${DATA_DIR}/elastic/elasticsearch.yml
+cp `dirname $0`/../elastic/elasticsearch.yml $ELASTIC_CONFIG
+sed -i s/@PUBLISH_HOST@/$IP/ $ELASTIC_CONFIG
+sed -i s/@NODE_NAME@/$IP/ $ELASTIC_CONFIG
+if [ $IP != "192.168.20.17" ]; then
+	sed -i s/@PING@/192.168.20.17/ $ELASTIC_CONFIG
+fi
+if [ $IP != "192.168.20.18" ]; then
+	sed -i s/@PING@/192.168.20.18/ $ELASTIC_CONFIG
+fi
+if [ $IP != "192.168.20.19" ]; then
+	sed -i s/@PING@/192.168.20.19/ $ELASTIC_CONFIG
+fi
+
 docker run \
 	--detach \
 	--hostname elastic-$(hostname) \
-	--memory 512m \
 	--name elasticsearch \
 	--env MACHINE_IP=$IP \
 	${PUBLISH[9200]} \
 	${PUBLISH[9300]} \
-	dockerfile/elasticsearch
+	--volume ${DATA_DIR}/elastic:/data \
+	dockerfile/elasticsearch \
+	/elasticsearch/bin/elasticsearch \
+	-Des.config=/data/elasticsearch.yml

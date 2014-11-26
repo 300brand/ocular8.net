@@ -1,0 +1,12 @@
+network:
+  publish_host: @PUBLISH_HOST@
+discovery:
+  zen.ping.multicast.enabled: false
+  zen.ping.unicast.hosts: [ "@PING@", "@PING@" ]
+cluster:
+  name: ocular8_300brand
+node:
+  name: @NODE_NAME@
+path:
+  logs: /data/log
+  data: /data/data
