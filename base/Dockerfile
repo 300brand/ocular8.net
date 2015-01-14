@@ -6,7 +6,7 @@ ENV        DEBIAN_FRONTEND noninteractive
 RUN        ping -c1 -w1 192.168.20.21 && echo 'Acquire::http { Proxy "http://192.168.20.21:3142"; };' >> /etc/apt/apt.conf.d/01proxy || true
 RUN        sed 's/main$/main universe/' -i /etc/apt/sources.list
 # NOTE     To cause an update (and upgrade), change the date below to today
-RUN        apt-get update # LAST_UPDATE: May 15, 2014
+RUN        apt-get update # LAST_UPDATE: Jan 15, 2015
 RUN        apt-get upgrade -y
 
 RUN        apt-get install -y supervisor openssh-server
