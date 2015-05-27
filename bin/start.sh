@@ -133,8 +133,9 @@ fi
 docker run \
 	--detach \
 	--hostname elastic-$(hostname) \
-	--name elasticsearch \
+	--name elasticsearch4g \
 	--env MACHINE_IP=$IP \
+	--env ES_HEAP_SIZE=4g \
 	${PUBLISH[9200]} \
 	${PUBLISH[9300]} \
 	--volume ${DATA_DIR}/elastic:/data \
